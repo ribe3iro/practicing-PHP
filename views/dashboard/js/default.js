@@ -1,7 +1,9 @@
+const FULL_URL = "http://localhost/teste/";
+
 $(function(){
     $.ajax({
         type: "GET",
-        url: "dashboard/xhrGetAllPosts",
+        url: FULL_URL+"dashboard/xhrGetAllPosts",
         dataType: "json",
         success: function(response){
             if(response.okay){
@@ -24,7 +26,7 @@ $(function(){
     
                 $.ajax({
                     type: "POST",
-                    url: "dashboard/xhrDeletePost",
+                    url: FULL_URL+"dashboard/xhrDeletePost",
                     dataType: "json",
                     data: {"id": id},
                     success: function(response){

@@ -4,12 +4,10 @@ class View{
     function __construct(){
     }
 
-    public function render($name, $load_view = true){
-        if($load_view){
-            require "views/header.php";
-            require "views/" . $name . ".php";
-            require "views/footer.php";
-        }
+    public function render($name){
+        require "views/header.php";
+        require "views/" . $name . ".php";
+        require "views/footer.php";
     }
 }
 

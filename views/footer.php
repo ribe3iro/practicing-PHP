@@ -1,6 +1,6 @@
     </div>
     <div id="footer">
-        Footer :D
+        © 2021 Ribe3iro
     </div>
 
 </body>

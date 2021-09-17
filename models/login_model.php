@@ -16,17 +16,18 @@ class Login_Model extends Model{
 
             $sth->execute($args);
             if($sth->rowCount() <= 0){
-                return "Login Failed";
+                return ["okay" => false];
             }else{
                 $result = $sth->fetchAll();
                 Session::init();
                 Session::set("logged_in", true);
                 Session::set("user_id", $result[0]["id"]);
                 Session::set("login", $result[0]["login"]);
-                header('location: ../dashboard');
+                Session::set("role", $result[0]["role"]);
+                return ["okay" => true];
             }
         }catch(Exception $e){
-            return "Error connecting to the database";
+            return ["okay" => false];
         }
     }
 }

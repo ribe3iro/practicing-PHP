@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <title>😎📋</title>
+    <title>MVC Training</title>
     <link rel="stylesheet" href="<?=URL?>public/css/default.css">
     <script type='text/javascript' src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
     <?php
@@ -16,13 +16,16 @@
 </head>
 <body>
     <div id="header">
-        Beatiful header<br>
-        <a href="<?=URL?>index">Home</a>
-        <a href="<?=URL?>help">Help</a>
-        <?php if(Session::get("logged_in")):?>
-            <a href="<?=URL?>dashboard/logout">Logout</a>
+        <?php if( !Session::get("logged_in") ):?>
+            <a class="dlink" href="<?=URL?>index">Home</a>
+            <a class="dlink" href="<?=URL?>help">Help</a>
+            <a class="dlink" href="<?=URL?>login">Login</a>
         <?php else:?>
-            <a href="<?=URL?>login">Login</a>
+            <a class="dlink" href="<?=URL?>dashboard">Dashboard</a>
+            <?php if( Session::get("role") == 'owner'): ?>
+                <a class="dlink" href="<?=URL?>user">User</a>
+            <?php endif;?>
+            <a class="dlink" href="<?=URL?>dashboard/logout">Logout</a>
         <?php endif;?>
     </div>
     <div id="content">

@@ -23,23 +23,18 @@ class Handler{
 
             $method = array_shift($url);
 
-            $load_view;
-
             if(method_exists($controller, $method) && $method!="load"){
                 $arguments = $url;
                 if(isset($arguments)){
-                    $load_view = $controller->{$method}($arguments);
+                    $controller->{$method}($arguments);
                 }else{
-                    $load_view = $controller->{$method};
+                    $controller->{$method};
                 }
             }else if(isset($method)){
                 throw new Exception("This method doesn't exist");
+            }else{
+                $controller->show();
             }
-
-            if(!isset($load_view)){
-                $load_view = true;
-            }
-            $controller->show($load_view);
             
         }catch(Exception $e){
             require "controllers/error_.php";

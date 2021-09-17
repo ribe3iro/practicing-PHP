@@ -17,22 +17,22 @@ class Dashboard_Model extends Model{
             
             if($sth->rowCount() > 0){
                 Session::init();
-                return json_encode(["okay" => true,
+                return ["okay" => true,
                                     "text" => $text,
                                     "id" => $this->db->lastInsertId(),
-                                    "login" => Session::get("login")]);
+                                    "login" => Session::get("login")];
             }else{
                 throw new Exception();
             }
 
         }catch(Exception $e){
-            return json_encode(["okay" => false]);
+            return ["okay" => false];
         }
     }
 
     function selectAllPosts(){
         try{
-            $query = "SELECT posts.user_id, posts.id, users.login, posts.text FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY posts.user_id";
+            $query = "SELECT posts.user_id, posts.id, users.login, posts.text FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY users.id";
             $sth = $this->db->prepare($query);
             $sth->setFetchMode(PDO::FETCH_ASSOC);
             $sth->execute();
@@ -47,14 +47,14 @@ class Dashboard_Model extends Model{
                     }
                     unset($posts[$i]["user_id"]);
                 }
-                return json_encode(["okay" => true,
-                                    "data" => $posts]);
+                return ["okay" => true,
+                                    "data" => $posts];
             }else{
                 throw new Exception();
             }
 
         }catch(Exception $e){
-            return json_encode(["okay" => false]);
+            return ["okay" => false];
         }
     }
 
@@ -65,13 +65,13 @@ class Dashboard_Model extends Model{
             $sth->execute([":id"=>$id]);
             
             if($sth->rowCount() > 0){
-                return json_encode(["okay" => true]);
+                return ["okay" => true];
             }else{
                 throw new Exception();
             }
 
         }catch(Exception $e){
-            return json_encode(["okay" => false]);
+            return ["okay" => false];
         }
     }
 }

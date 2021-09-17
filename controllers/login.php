@@ -6,7 +6,7 @@ class Login extends Controller{
         Session::init();
         $logged = Session::get('logged_in');
         if($logged){
-            header('location: ./dashboard');
+            header('location: '.URL.'dashboard');
             exit;
         }
         $this->view->loginStatus = "";
@@ -17,6 +17,13 @@ class Login extends Controller{
     }
 
     function loginDo(){
-        $this->view->loginStatus = $this->model->login();
+        $result = $this->model->login();
+        if($result['okay']){
+            header('location: '.URL.'dashboard');
+            exit;
+        }else{
+            $this->view->loginStatus = "Login failed!";
+            $this->view->render("login/index");
+        }
     }
 }
