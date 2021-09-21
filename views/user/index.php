@@ -1,32 +1,49 @@
-<h1>User</h1>
+<h1>Create User</h1>
     <?php
         if( !$this->userList['data'] ){
             echo "Error loading the users!";
         }else{
             ?>
             <form action="<?=URL?>user/create" method="POST">
-                <label>Login</label><input type="text" name="login"><br>
-                <label>Password</label><input type="password" name="password"><br>
-                <label>Role</label>
-                    <select name="role">
+                <div class="form-group w-25">
+                    <label>Login</label>
+                    <input class="form-control" type="text" name="login" placeholder="Login">
+                </div>
+                <div class="form-group w-25">
+                    <label>Password</label>
+                    <input class="form-control" type="password" name="password" placeholder="Password">
+                </div>
+                <div class="form-group w-25">
+                    <label>Role</label>
+                    <select class="form-control" name="role">
                         <option value="default">default</option>
                         <option value="admin">admin</option>
-                    </select><br>
-                <input type="submit" value="Create">
+                    </select>
+                </div>
+                <input class="btn btn-primary" type="submit" value="Create">
             </form>
-            <?php
-            echo "<table>";
-            foreach($this->userList['data'] as $user){
-                echo "<tr>";
-                echo "<td>".$user['id']."</td>";
-                echo "<td>".$user['login']."</td>";
-                echo "<td>".$user['role']."</td>";
-                echo "<td><a href='".URL."user/edit/".$user['id']."'>Edit</a></td>";
-                if( $user['id'] != Session::get("id") && $user['role'] != 'owner'){
-                    echo "<td><a href='".URL."user/delete/".$user['id']."'>Delete</a></td>";
+            <div class="mt-5">
+                <h2>Users</h2>
+                <div class='row'>
+                    <div class='col-1 font-weight-bold'>ID</div>
+                    <div class='col-3 font-weight-bold'>Login</div>
+                    <div class='col-1 font-weight-bold'>Role</div>
+                    <div class='col-1 font-weight-bold'>Edit</div>
+                    <div class='col-1 font-weight-bold'>Delete</div>
+                </div>
+                <hr class="bg-info">
+                <?php
+                foreach($this->userList['data'] as $user){
+                    echo "<div class='row'>";
+                        echo "<div class='col-1'>".$user['id']."</div>";
+                        echo "<div class='col-3'>".$user['login']."</div>";
+                        echo "<div class='col-1'>".$user['role']."</div>";
+                        echo "<div class='col-1'><a class='btn-sm btn-outline-info' href='".URL."user/edit/".$user['id']."'>Edit</a></div>";
+                        if( $user['id'] != Session::get("id") && $user['role'] != 'owner'){
+                            echo "<div class='col-1'><a class='btn-sm btn-outline-danger' href='".URL."user/delete/".$user['id']."'>Delete</a></div>";
+                        }
+                    echo "</div>";
                 }
-                echo "</tr>";
             }
-            echo "</table>";
-        }
-    ?>
+                ?>
+            </div>

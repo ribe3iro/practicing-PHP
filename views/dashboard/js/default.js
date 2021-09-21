@@ -10,18 +10,18 @@ $(function(){
                 response.data.forEach(post => {
                     let content="";
                     if(post.this){
-                        content+="<div><b>"+post.login +" (you):</b> "+ post.text;
-                        content+="<a class='delete' rel='"+post.id+"' href='#'>(delete)</a></div>";
+                        content+="<div class='row mb-2 border-bottom border-primary'><b class='col-2'>"+post.login +" (you)</b> <div class='col-9'>"+ post.text + "</div>";
+                        content+="<a rel='delete' id='"+post.id+"' href='#' class='col-1 btn-sm btn-outline-danger'>Delete</a></div>";
                     }else{
-                        content+="<div><b>"+post.login +":</b> "+ post.text+"</div>";
+                        content+="<div class='row mb-2 border-bottom border-primary'><div class='col-2'>"+post.login +"</div> <div class='col-9'>"+ post.text+"</div></div>";
                     }
                     $("#postListing").append(content);
                 });
             }
 
 
-            $(document).on("click", ".delete", function(){
-                let id = $(this).attr("rel");
+            $(document).on("click", "a[rel='delete']", function(){
+                let id = $(this).attr("id");
                 let element = $(this);
     
                 $.ajax({
@@ -63,7 +63,7 @@ $(function(){
                 let msg;
                 if(response.okay){
                     msg = "Post made!";
-                    let content = "<div><b>"+response.login +" (you):</b> "+ response.text+"<a class='delete' rel='"+response.id+"' href='#'>(delete)</a></div>";
+                    let content = "<div class='row mb-2 border-bottom border-primary'><b class='col-2'>"+response.login +" (you)</b> <div class='col-9'>"+ response.text+"</div><a rel='delete' id='"+response.id+"' href='#' class='col-1 btn-sm btn-outline-danger'>Delete</a></div>";
                     $("#postListing").append(content);
                 }else{
                     msg = "Error connecting to the database";

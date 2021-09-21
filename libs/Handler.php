@@ -6,6 +6,7 @@ class Handler{
             $url = (isset($_GET['url']))? $_GET['url'] : "index";
 
             $url = rtrim($url, "/");
+            $url = filter_var($url, FILTER_SANITIZE_URL);
             $url = explode("/", $url);
 
             $controller_name = array_shift($url);

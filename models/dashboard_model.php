@@ -32,7 +32,7 @@ class Dashboard_Model extends Model{
 
     function selectAllPosts(){
         try{
-            $query = "SELECT posts.user_id, posts.id, users.login, posts.text FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY users.id";
+            $query = "SELECT posts.user_id, posts.id, users.login, posts.text FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY posts.id";
             $sth = $this->db->prepare($query);
             $sth->setFetchMode(PDO::FETCH_ASSOC);
             $sth->execute();

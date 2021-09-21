@@ -1,7 +1,3 @@
-body{
-    background: silver;
-}
-
 .dlink{
     padding: 10px 20px;
     background-color: #dbffff;
@@ -18,7 +14,7 @@ body{
 }
 
 
-#header{
+.header{
     padding: 20px;
     background: #155680;
     color: #d8d8d8;
